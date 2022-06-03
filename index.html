@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Train Alert v0.1</h2>
+
+<p id="demo">Loading data...</p>
+<p id="location">Loading data...</p>
+
+<script>
+fetch("http://127.0.0.1:5000/trains")
+  .then(response => response.json())
+  .then(data => {
+           console.log(data);
+           document.getElementById("demo").innerHTML = data.data[0].liin;
+           data.data.forEach(function(train) {
+               console.log(train.liin);
+           });
+       });
+
+var x = document.getElementById("location");
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function showPosition(position) {
+  x.innerHTML = "Latitude: " + position.coords.latitude + 
+  "<br>Longitude: " + position.coords.longitude;
+}
+
+getLocation();
+
+</script>
+
+</body>
+</html> 
+
