@@ -27,13 +27,20 @@ window.addEventListener('load', function() {
     }
 });
 
-Notification.requestPermission(function(result) {
-  if (result === 'granted') {
-    navigator.serviceWorker.ready.then(function(registration) {
-      registration.showNotification('Notification with ServiceWorker');
-    });
-  }
-});
+function showNotification(text) {
+  Notification.requestPermission(function(result) {
+    if (result === 'granted') {
+        navigator.serviceWorker.ready.then(function(registration) {
+          registration.getNotifications().then(function(notifications) {
+              notifications.forEach(function(notification) {
+                  notification.close();
+              });
+          })
+          registration.showNotification(text);
+      });
+    }
+  });
+}
 
 //Notification.requestPermission().then(function(result) {
 //  console.log(result);
@@ -70,13 +77,15 @@ function showPosition(position) {
     .then(data => {
       console.log(data);
       document.getElementById("demo").innerHTML = data.toFixed(2) + " km";
-      //var text = 'Test!!!';
-      //var notification = new Notification('Notification', { body: text});
+      showNotification("Closest train is "+ data.toFixed(3)*1000 + " m away.");
     });
 }
 
 getLocation();
 
+var intervalId = setInterval(function() {
+  getLocation();
+}, 5000);
 
 </script>
 
