@@ -86,9 +86,9 @@ function showPosition(position) {
     .then(data => {
       console.log(data);
       document.getElementById("demo").innerHTML = data.toFixed(2) + " km";
-      showNotification("Closest train is "+ data.toFixed(3)*1000 + " m away.");
       if (data < 1.0) {
           document.getElementById("warning").innerHTML = "STOP";
+          showNotification("Closest train is "+ data.toFixed(3)*1000 + " m away.");
       } else {
           document.getElementById("warning").innerHTML = "GO";
       }
