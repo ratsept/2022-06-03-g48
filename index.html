@@ -8,7 +8,7 @@
 <p id="location">Loading data...</p>
 
 <script>
-fetch("http://127.0.0.1:5000/trains")
+fetch("https://g48-trainalert.herokuapp.com/trains")
   .then(response => response.json())
   .then(data => {
            console.log(data);
