@@ -8,7 +8,10 @@
 <p id="location">Loading data...</p>
 
 <script>
-fetch("https://g48-trainalert.herokuapp.com/trains")
+var server = "127.0.0.1:8000";
+//var server = "https://g48-trainalert.herokuapp.com";
+
+fetch("/trains")
   .then(response => response.json())
   .then(data => {
            console.log(data);
@@ -19,6 +22,8 @@ fetch("https://g48-trainalert.herokuapp.com/trains")
        });
 
 var x = document.getElementById("location");
+var longitude = 0;
+var latitude = 0;
 
 function getLocation() {
   if (navigator.geolocation) {
@@ -29,11 +34,19 @@ function getLocation() {
 }
 
 function showPosition(position) {
+  longitude = position.coords.longitude;
+  latitude = position.coords.latitude;
   x.innerHTML = "Latitude: " + position.coords.latitude + 
   "<br>Longitude: " + position.coords.longitude;
+  fetch("/closest_train?lon="+longitude+"&lat="+latitude)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+    });
 }
 
 getLocation();
+
 
 </script>
 
