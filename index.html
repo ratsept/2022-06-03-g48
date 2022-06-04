@@ -2,7 +2,7 @@
 <html>
 <body>
 
-<h2>Train Alert v0.1</h2>
+<h2>crossintime v0.1</h2>
 
 <p id="demo">Loading data...</p>
 <p id="location">Loading data...</p>
@@ -19,7 +19,6 @@ fetch("/trains")
   .then(response => response.json())
   .then(data => {
            console.log(data);
-           document.getElementById("demo").innerHTML = data.data[0].liin;
            data.data.forEach(function(train) {
                console.log(train.liin);
            });
@@ -48,6 +47,7 @@ function showPosition(position) {
       console.log(data);
       var text = 'Test!!!';
       var notification = new Notification('Notification', { body: text});
+      document.getElementById("demo").innerHTML = data.toFixed(2) + " km";
     });
 }
 
