@@ -11,6 +11,10 @@
 var server = "127.0.0.1:8000";
 //var server = "https://g48-trainalert.herokuapp.com";
 
+Notification.requestPermission().then(function(result) {
+  console.log(result);
+});
+
 fetch("/trains")
   .then(response => response.json())
   .then(data => {
@@ -42,6 +46,8 @@ function showPosition(position) {
     .then(response => response.json())
     .then(data => {
       console.log(data);
+      var text = 'Test!!!';
+      var notification = new Notification('Notification', { body: text});
     });
 }
 
