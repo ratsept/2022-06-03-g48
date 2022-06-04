@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, Response
 from geopy import distance
 import requests
 import json
@@ -9,6 +9,11 @@ app = Flask(__name__)
 def hello_world():
     f = open('index.html','r')
     return f.read()
+
+@app.route("/service-worker.js")
+def service_worker():
+    f = open('service-worker.js','r')
+    return Response(f.read(), mimetype='text/javascript')
 
 @app.route("/trains")
 def trains():
