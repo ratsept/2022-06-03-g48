@@ -1,4 +1,4 @@
-from flask import Flask, request, Response
+from flask import Flask, request, Response, send_file
 from geopy import distance
 import requests
 import json
@@ -14,6 +14,10 @@ def hello_world():
 def service_worker():
     f = open('service-worker.js','r')
     return Response(f.read(), mimetype='text/javascript')
+
+@app.route("/train.png")
+def train():
+    return send_file('train.png', mimetype='image/png')
 
 @app.route("/trains")
 def trains():
