@@ -7,6 +7,12 @@
 <p id="demo">Loading data...</p>
 <p id="location">Loading data...</p>
 
+<!-- Rounded switch -->
+<label class="switch">
+  <input type="checkbox" id="enable_notify"> Enable Notifications
+  <span class="slider round"></span>
+</label>
+
 <script>
 var isPushEnabled = false;
 var server = "127.0.0.1:8000";
@@ -36,7 +42,9 @@ function showNotification(text) {
                   notification.close();
               });
           })
-          registration.showNotification(text, {badge:"/train.png"});
+          if (document.getElementById("enable_notify").checked == true) {
+              registration.showNotification(text, {badge:"/train.png"});
+          }
       });
     }
   });
